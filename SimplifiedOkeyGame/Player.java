@@ -28,7 +28,19 @@ public class Player {
      */
     public int findLongestChain() {
         int longestChain = 0;
-
+        int similarTilesCounter = 0;        
+        // This variable will be used for count the same serial tiles to detect the longest tile serie
+        for(int n = 0; n < playerTiles.length - 1; n++){
+            if(playerTiles[n] == playerTiles[n + 1]){
+                similarTilesCounter++;
+            }
+            if(similarTilesCounter > longestChain){
+                longestChain = similarTilesCounter;
+            }
+            if(playerTiles[n] != playerTiles[n + 1]){
+                similarTilesCounter = 0;
+            }
+        }
         return longestChain;
     }
 
