@@ -82,7 +82,7 @@ public class Player {
      */
     public void addTile(Tile t) {
 
-        for (int i = 0; i < playerTiles.length; i++) {
+        for (int i = 0; i + 1 < playerTiles.length; i++) {
             if (t.getValue() >= playerTiles[i].getValue() && t.getValue() <= playerTiles[i + 1].getValue()) {
                 insertTile(t, i + 1);
                 return;
