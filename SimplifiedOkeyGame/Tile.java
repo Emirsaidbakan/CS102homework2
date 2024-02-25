@@ -36,13 +36,14 @@ public class Tile {
     }
 
     /*
-     * TODO: should determine if this tile and given tile can form a chain together
-     * this method should check the difference in values of the two tiles
-     * should return true if the absoulute value of the difference is 1 (they can form a chain)
-     * otherwise, it should return false (they cannot form a chain)
+     * To determine if this tile and given tile can form a chain together
+     * this method checks the difference in values of the two tiles
+     * and returns true if the absoulute value of the difference is 1 (they can form a chain)
+     * otherwise, it  returns false (they cannot form a chain)
      */
     public boolean canFormChainWith(Tile t) {
-        return false;
+        //This returns ture when the abs value if the difference is equal to 1 otherwise reurns flase
+        return Math.abs(this.value - t.value)== 1;
     }
 
     public String toString() {
