@@ -1,7 +1,8 @@
+import java.util.Arrays;
 public class Player {
-    String playerName;
-    Tile[] playerTiles;
-    int numberOfTiles;
+    private String playerName;
+    private Tile[] playerTiles;
+    private int numberOfTiles;
 
     public Player(String name) {
         setName(name);
@@ -17,7 +18,23 @@ public class Player {
      * check the assigment text for more details on winning condition
      */
     public boolean checkWinning() {
-        return false;
+        // sort the array so we can check the consecutive numbers more easily
+        Arrays.sort(playerTiles, 0, numberOfTiles); 
+        
+        
+        int currentChainLength = 1;
+        for (int i = 0; i < numberOfTiles - 1; i++) {
+            if ( playerTiles[i].getValue() + 1 == playerTiles[i+1].getValue()) {
+                currentChainLength ++;
+                if (currentChainLength == 14) {
+                    return true;
+                }
+            }
+            else {
+                currentChainLength = 1;
+            }
+        }
+        return  false;
     }
 
     /*
