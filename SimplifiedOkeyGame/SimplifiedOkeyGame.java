@@ -274,6 +274,4 @@ public class SimplifiedOkeyGame {
         while ( test == false);
     }
 }
-
-
-
+//test
