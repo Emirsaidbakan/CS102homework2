@@ -40,13 +40,14 @@ public class SimplifiedOkeyGame {
             players[0].playerTiles[playerOkeyIndex] = tiles[distrubutedCardIndex];
             distrubutedCardIndex++;
             playerOkeyIndex++;
-
         }
+        players[0].numberOfTiles = 15;
         for (int i = 1; i < players.length; i++){
             for (int k = 0; k < 14; k++) {
                 players[i].playerTiles[k] = tiles [distrubutedCardIndex];
                 distrubutedCardIndex++;
             }
+            players[i].numberOfTiles = 14;
         }
     }
 
