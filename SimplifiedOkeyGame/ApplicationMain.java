@@ -80,6 +80,7 @@ public class ApplicationMain {
 
                     // I have added a while statement to make sure the given index is correct.
                     // As the index should be 0 <= index <= 14 
+                    //This while loop continues to ask for an index from the user until the enetred index is valid
                     while(playerChoice < 0 || playerChoice > 14) {
                         System.out.println("The index entered is not valid! Please enter a valid index between 0 and 14: ");
                         playerChoice = sc.nextInt();
@@ -93,9 +94,16 @@ public class ApplicationMain {
                         System.out.println("Congratulations, you win!");    
                     }
                     else{
-                        // TODO: the game ended with no more tiles in the stack
-                        // determine the winner based on longest chain lengths of the players
-                        // use getPlayerWithHighestLongestChain method of game for this task
+                        // The game ended with no more tiles in the stack
+                        // Hence to determine the winner based on longest chain lengths of the players
+                        // I used getPlayerWithHighestLongestChain method of game for this task
+                        // I printed all the names of the players who are the winners by using  foreach loop 
+                        // since the getPlayerWithHighestLongestChain method returns an array
+                        System.out.print("Congratulations, player(s) " );
+                        for (Player player: game.getPlayerWithHighestLongestChain()){
+                            System.out.print(player.getName()+", ");
+                        }
+                        System.out.print("you win!");
                     }
                 }
             }
@@ -121,9 +129,16 @@ public class ApplicationMain {
                         System.out.println(game.getCurrentPlayerName() + " wins.");
                     }
                     else{
-                        // TODO: the game ended with no more tiles in the stack
-                        // determine the winner based on longest chain lengths of the players
-                        // use getPlayerWithHighestLongestChain method of game for this task
+                        // The game ended with no more tiles in the stack
+                        // Hence to determine the winner based on longest chain lengths of the players
+                        // I used getPlayerWithHighestLongestChain method of game for this task
+                        // I printed all the names of the players who are the winners by using  foreach loop 
+                        // since the getPlayerWithHighestLongestChain method returns an array
+                        System.out.print("Congratulations, player(s) " );
+                        for (Player player: game.getPlayerWithHighestLongestChain()){
+                            System.out.print(player.getName()+", ");
+                        }
+                        System.out.print("you win!");
                     }
                 }
             }
