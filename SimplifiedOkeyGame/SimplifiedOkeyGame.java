@@ -2,13 +2,13 @@ import java.util.Scanner;
 
 public class SimplifiedOkeyGame {
 
-    Player[] players;
-    Tile[] tiles;
-    int tileCount;
+    private Player[] players;
+    private Tile[] tiles;
+    private int tileCount;
 
-    Tile lastDiscardedTile;
+    private Tile lastDiscardedTile;
 
-    int currentPlayerIndex = 0;
+    private int currentPlayerIndex = 0;
 
     public SimplifiedOkeyGame() {
         players = new Player[4];
@@ -111,8 +111,8 @@ public class SimplifiedOkeyGame {
      */
     public void discardTileForComputer() {
         //Checks whether there are duplicate tiles, if there are then that tile is discarded and breaks
-        for (int i = 0; i < getCurrentPlayer().playerTiles.length; i++) {
-            if (getCurrentPlayer().getTiles()[i].value == getCurrentPlayer().getTiles()[i + 1].value) {
+        for (int i = 0; i < getCurrentPlayer().getTiles().length; i++) {
+            if (getCurrentPlayer().getTiles()[i].getValue() == getCurrentPlayer().getTiles()[i + 1].getValue()) {
                 discardTile(i);
                 return;
             }
@@ -122,8 +122,8 @@ public class SimplifiedOkeyGame {
         int shortestChain = 100;
         int temp = 0;
         int index = 0;
-        for (int i = 0; i < getCurrentPlayer().playerTiles.length; i++) {
-            if(getCurrentPlayer().playerTiles[i + 1].getValue() - getCurrentPlayer().playerTiles[i].getValue() == 1) {
+        for (int i = 0; i < getCurrentPlayer().getTiles().length; i++) {
+            if(getCurrentPlayer().getTiles()[i + 1].getValue() - getCurrentPlayer().getTiles()[i].getValue() == 1) {
                 temp++;
             }
             if (temp < shortestChain) {

@@ -1,6 +1,6 @@
 public class Tile {
     
-    int value;
+    private int value;
 
     /*
      * creates a tile using the given value. False jokers are not included in this game.

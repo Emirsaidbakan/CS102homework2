@@ -1,7 +1,7 @@
 public class Player {
-    String playerName;
-    Tile[] playerTiles;
-    int numberOfTiles;
+    private String playerName;
+    private Tile[] playerTiles;
+    private int numberOfTiles;
 
     public Player(String name) {
         setName(name);
