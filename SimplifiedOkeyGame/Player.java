@@ -108,7 +108,7 @@ public class Player {
      */
     public void displayTiles() {
         System.out.println(playerName + "'s Tiles:");
-        for (int i = 0; i < numberOfTiles; i++) {
+        for (int i = 0; i <playerTiles.length; i++) {
             System.out.print(playerTiles[i].toString() + " ");
         }
         System.out.println();
