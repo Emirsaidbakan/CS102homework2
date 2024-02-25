@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class SimplifiedOkeyGame {
 
     Player[] players;
@@ -26,21 +28,13 @@ public class SimplifiedOkeyGame {
         tileCount = 104;
     }
 
+    /*
+     * TODO: distributes the starting tiles to the players
+     * player at index 0 gets 15 tiles and starts first
+     * other players get 14 tiles, this method assumes the tiles are already shuffled
+     */
     public void distributeTilesToPlayers() {
-        int playerOkeyIndex = 0;
-        int distrubutedCardIndex = 0;
-        while (playerOkeyIndex < 15) {
-            players[0].playerTiles[playerOkeyIndex] = tiles[distrubutedCardIndex];
-            distrubutedCardIndex++;
-            playerOkeyIndex++;
 
-        }
-        for (int i = 1; i < players.length; i++){
-            for (int k = 0; k < 14; k++) {
-                players[i].playerTiles[k] = tiles [distrubutedCardIndex];
-                distrubutedCardIndex++;
-            }
-        }
     }
 
     /*
@@ -49,7 +43,7 @@ public class SimplifiedOkeyGame {
      * it should return the toString method of the tile so that we can print what we picked
      */
     public String getLastDiscardedTile() {
-        return lastDiscardedTile.toString();
+        return null;
     }
 
     /*
@@ -66,17 +60,7 @@ public class SimplifiedOkeyGame {
      * TODO: should randomly shuffle the tiles array before game starts
      */
     public void shuffleTiles() {
-    /*  we  will shuffle and change the cards positions 52 times (104 / 2) 
-     *  this amount is usually enough to a fair shuffle */
-        Random randomTile = new Random();
-        int randomTileIndex;
-        int temp; // this temp is for to change te cards position with each other
-        for(int n = 0; n < 52; n++){
-            temp = tiles[n].value;
-            randomTileIndex = randomTile.nextInt(104) - 1;
-            tiles[n].value = tiles[randomTileIndex].value;
-            tiles[randomTileIndex].value = temp;
-        }
+
     }
 
     /*
@@ -87,26 +71,13 @@ public class SimplifiedOkeyGame {
         return false;
     }
 
-
+    /* TODO: finds the player who has the highest number for the longest chain
+     * if multiple players have the same length may return multiple players
+     */
     public Player[] getPlayerWithHighestLongestChain() {
-        Player[] winners = new Player[players.length];
-        int max = 0;
-        int playerIndex = 0;
+        Player[] winners = new Player[1];
 
-        for (int i = 0; i <players.length; i++) {
-            if (players[i].findLongestChain() > max) {
-                max = players[i].findLongestChain();
-            }
-        }
-        int number = 0;
-        for (int i = 0; i <players.length; i++) {
-            if (players[i].findLongestChain()== max) {
-                winners[number] =winners[i];
-                number++;
-            }
-        }
         return winners;
-
     }
     
     /*
@@ -124,7 +95,17 @@ public class SimplifiedOkeyGame {
      * by checking if it increases the longest chain length, if not get the top tile
      */
     public void pickTileForComputer() {
+        
+        int previousLongestChain = getCurrentPlayer().findLongestChain(); //Before adding the last discarded tile
+        getCurrentPlayer().addTile(lastDiscardedTile);
+        int newLongestChain = getCurrentPlayer().findLongestChain(); //After adding the last discarded tile
 
+        //Checks whether the longest chain has increased in size after adding the into the player's hand.
+        //If not, it removes the tile and gets the top tile       
+        if (previousLongestChain <= newLongestChain) { 
+            getCurrentPlayer().getAndRemoveTile(getCurrentPlayer().findPositionOfTile(lastDiscardedTile));
+            getTopTile();
+        } 
     }
 
     /*
@@ -142,6 +123,9 @@ public class SimplifiedOkeyGame {
      */
     public void discardTile(int tileIndex) {
 
+        lastDiscardedTile = getCurrentPlayer().playerTiles[tileIndex];
+        getCurrentPlayer().playerTiles[tileIndex] = null;
+
     }
 
     public void displayDiscardInformation() {
@@ -151,7 +135,7 @@ public class SimplifiedOkeyGame {
     }
 
     public void displayCurrentPlayersTiles() {
-        players[currentPlayerIndex].displayTiles();
+        getCurrentPlayer().displayTiles();
     }
 
     public int getCurrentPlayerIndex() {
@@ -159,7 +143,7 @@ public class SimplifiedOkeyGame {
     }
 
       public String getCurrentPlayerName() {
-        return players[currentPlayerIndex].getName();
+        return getCurrentPlayer().getName();
     }
 
     public void passTurnToNextPlayer() {
@@ -170,6 +154,10 @@ public class SimplifiedOkeyGame {
         if(index >= 0 && index <= 3) {
             players[index] = new Player(name);
         }
+    }
+
+    public Player getCurrentPlayer() {
+        return getCurrentPlayer();
     }
 
 }
