@@ -243,6 +243,30 @@ public class SimplifiedOkeyGame {
 
     public Player getCurrentPlayer() {
          return players[currentPlayerIndex];
-
-}
+    }
+    /*
+    * This method aims to sort the tile array in ascending order
+    *
+    *@param list the tile that will be sorted
+    */
+    public static void sortArray(int[] list){
+        boolean test;
+        int temp;
+        do{
+            test = true;
+            for(int n = 0; n < list.length - 1; n++){
+                if(list[n] > list[n+1]){
+                    temp = list[n];
+                    list[n] = list[n + 1];
+                    list[n + 1] = temp;
+                }
+            }
+            for(int a = 0; a < list.length - 1; a++){
+                    if(list[a] > list[a+1]){
+                        test = false;
+                    }
+            }
+        }
+        while ( test == false);
+    }
 }
