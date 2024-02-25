@@ -7,12 +7,7 @@ public class Player {
     public Player(String name) {
         setName(name);
         playerTiles = new Tile[15]; // there are at most 15 tiles a player owns at any time
-        if (playerTiles[14].value == 0) {
-            numberOfTiles = 14;
-        }
-        else {
-            numberOfTiles = 15;
-        } 
+        numberOfTiles = 0;
     }
 
     /*
@@ -25,7 +20,7 @@ public class Player {
     public boolean checkWinning() {
 
         int currentChainLength = 1;
-        for (int i = 0; i < numberOfTiles- 1; i++) {
+        for (int i = 0; i < playerTiles.length- 1; i++) {
             if ( playerTiles[i].getValue() + 1 == playerTiles[i+1].getValue()) {
                 currentChainLength ++;
                 if (currentChainLength == 15) {
@@ -49,7 +44,7 @@ public class Player {
         int longestChain = 0;
         int similarTilesCounter = 0;        
         // This variable will be used for count the same serial tiles to detect the longest tile serie
-        for(int n = 0; n < numberOfTiles - 1; n++){
+        for(int n = 0; n <playerTiles.length - 1; n++){
             if(playerTiles[n] == playerTiles[n + 1]){
                 similarTilesCounter++;
             }
@@ -69,7 +64,7 @@ public class Player {
     public Tile getAndRemoveTile(int index) {
        if (index >= 0)
         {
-            for (int i = index; i + 1 < numberOfTiles; i++) {
+            for (int i = index; i + 1 < playerTiles.length; i++) {
                 playerTiles[i] = playerTiles[index+1];
             }
             return playerTiles[index];
@@ -96,7 +91,7 @@ public class Player {
     }
 
     private void insertTile(Tile t, int position){
-        for (int i = numberOfTiles - 2; i >= position; i--) {
+        for (int i = playerTiles.length - 2; i >= position; i--) {
             playerTiles[i + 1] = playerTiles[i];
         }
         playerTiles[position] = t;
@@ -120,7 +115,7 @@ public class Player {
      */
     public void displayTiles() {
         System.out.println(playerName + "'s Tiles:");
-        for (int i = 0; i < numberOfTiles; i++) {
+        for (int i = 0; i < playerTiles.length; i++) {
             System.out.print(playerTiles[i].toString() + " ");
         }
         System.out.println();
