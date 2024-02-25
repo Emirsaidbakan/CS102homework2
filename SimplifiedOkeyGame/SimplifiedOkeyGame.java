@@ -53,7 +53,31 @@ public class SimplifiedOkeyGame {
      * returns the toString method of the tile so that we can print what we picked
      */
     public String getTopTile() {
-        return null;
+
+        //Check if there are any tiles left
+        if (tileCount > 0) {
+            //Find the top tile
+            Tile currentTopTile = tiles[tileCount-1];
+
+            //Update the tile count
+            tileCount--;
+
+            //Creating a new array to store the tiles removing the top tile
+            Tile[] updatedTiles = new Tile[tileCount];
+            for (int i = 0; i < tileCount ; i ++) {
+                updatedTiles[i] = tiles[i];
+            }
+
+            //Update the tiles reference 
+            tiles = updatedTiles;
+
+            return  currentTopTile.toString();
+        } 
+        //If there are no tiles left, return an error message saying so
+        else {
+            String errorMessage = "No  more tiles left!";
+            return errorMessage;
+        }
     }
 
     /*
