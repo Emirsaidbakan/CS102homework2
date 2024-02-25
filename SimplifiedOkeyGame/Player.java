@@ -18,15 +18,12 @@ public class Player {
      * check the assigment text for more details on winning condition
      */
     public boolean checkWinning() {
-        // sort the array so we can check the consecutive numbers more easily
-        Arrays.sort(playerTiles, 0, numberOfTiles); 
-        
-        
+
         int currentChainLength = 1;
         for (int i = 0; i < numberOfTiles - 1; i++) {
             if ( playerTiles[i].getValue() + 1 == playerTiles[i+1].getValue()) {
                 currentChainLength ++;
-                if (currentChainLength == 14) {
+                if (currentChainLength == 15) {
                     return true;
                 }
             }
