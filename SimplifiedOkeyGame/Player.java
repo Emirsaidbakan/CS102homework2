@@ -84,7 +84,7 @@ public class Player {
     }
 
     private void insertTile(Tile t, int position){
-        for (int i = playerTiles.length - 1; i >= position; i--) {
+        for (int i = playerTiles.length - 2; i >= position; i--) {
             playerTiles[i + 1] = playerTiles[i];
         }
         playerTiles[position] = t;
