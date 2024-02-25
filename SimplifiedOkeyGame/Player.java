@@ -20,7 +20,7 @@ public class Player {
     public boolean checkWinning() {
 
         int currentChainLength = 1;
-        for (int i = 0; i < numberOfTiles - 1; i++) {
+        for (int i = 0; i < playerTiles.length - 1; i++) {
             if ( playerTiles[i].getValue() + 1 == playerTiles[i+1].getValue()) {
                 currentChainLength ++;
                 if (currentChainLength == 15) {
@@ -102,7 +102,7 @@ public class Player {
      */
     public int findPositionOfTile(Tile t) {
         int tilePosition = -1;
-        for (int i = 0; i < numberOfTiles; i++) {
+        for (int i = 0; i < playerTiles[i]; i++) {
             if(playerTiles[i].matchingTiles(t)) {
                 tilePosition = i;
             }
@@ -115,7 +115,7 @@ public class Player {
      */
     public void displayTiles() {
         System.out.println(playerName + "'s Tiles:");
-        for (int i = 0; i < numberOfTiles; i++) {
+        for (int i = 0; i < playerTiles[i].length; i++) {
             System.out.print(playerTiles[i].toString() + " ");
         }
         System.out.println();
