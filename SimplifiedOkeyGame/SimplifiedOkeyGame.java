@@ -177,7 +177,7 @@ public class SimplifiedOkeyGame {
      */
     public void discardTileForComputer() {
         //Checks whether there are duplicate tiles, if there are then that tile is discarded and breaks
-        for (int i = 0; i < getCurrentPlayer().getTiles().length; i++) {            
+        for (int i = 0; i + 1< getCurrentPlayer().getTiles().length; i++) {            
             if (getCurrentPlayer().getTiles()[i + 1] != null) {
                 if (getCurrentPlayer().getTiles()[i].getValue() == getCurrentPlayer().getTiles()[i + 1].getValue()) {
                     discardTile(i);
@@ -190,7 +190,7 @@ public class SimplifiedOkeyGame {
         int shortestChain = 100;
         int temp = 0;
         int index = 0;
-        for (int i = 0; i < getCurrentPlayer().getTiles().length; i++) {
+        for (int i = 0; i + 1 < getCurrentPlayer().getTiles().length; i++) {
             if (getCurrentPlayer().getTiles()[i + 1] != null) {
                 if(getCurrentPlayer().getTiles()[i + 1].getValue() - getCurrentPlayer().getTiles()[i].getValue() == 1) {
                     temp++;
