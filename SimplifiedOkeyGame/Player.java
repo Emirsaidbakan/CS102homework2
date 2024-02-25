@@ -62,10 +62,17 @@ public class Player {
      * TODO: removes and returns the tile in given index position
      */
     public Tile getAndRemoveTile(int index) {
-        for (int i = index; i < playerTiles.length;i++) {
-            playerTiles[i] = playerTiles[index+1];
+       if (index >= 0)
+        {
+            for (int i = index; i + 1 < playerTiles.length; i++) {
+                playerTiles[i] = playerTiles[index+1];
+            }
+            return playerTiles[index];
         }
-        return playerTiles[index];
+        else {
+            System.out.println("error");
+        }
+        return null;
     }
 
     /*
