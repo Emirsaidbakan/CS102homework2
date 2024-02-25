@@ -43,7 +43,7 @@ public class SimplifiedOkeyGame {
      * it should return the toString method of the tile so that we can print what we picked
      */
     public String getLastDiscardedTile() {
-        return null;
+        return lastDiscardedTile.toString();
     }
 
     /*
@@ -84,7 +84,17 @@ public class SimplifiedOkeyGame {
      * TODO: should randomly shuffle the tiles array before game starts
      */
     public void shuffleTiles() {
-
+    /*  we  will shuffle and change the cards positions 52 times (104 / 2) 
+     *  this amount is usually enough to a fair shuffle */
+        Random randomTile = new Random();
+        int randomTileIndex;
+        int temp; // this temp is for to change the cards position with each other
+        for(int n = 0; n < 52; n++){
+            temp = tiles[n].value;
+            randomTileIndex = randomTile.nextInt(104) - 1;
+            tiles[n].value = tiles[randomTileIndex].value;
+            tiles[randomTileIndex].value = temp;
+        }
     }
 
     /*
