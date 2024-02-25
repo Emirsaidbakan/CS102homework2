@@ -40,14 +40,16 @@ public class SimplifiedOkeyGame {
             players[0].playerTiles[playerOkeyIndex] = tiles[distrubutedCardIndex];
             distrubutedCardIndex++;
             playerOkeyIndex++;
+
         }
-        players[0].numberOfTiles = 15;
         for (int i = 1; i < players.length; i++){
             for (int k = 0; k < 14; k++) {
                 players[i].playerTiles[k] = tiles [distrubutedCardIndex];
                 distrubutedCardIndex++;
             }
-            players[i].numberOfTiles = 14;
+        }
+        for (Player player : players) {
+            
         }
 
     }
@@ -117,7 +119,7 @@ public class SimplifiedOkeyGame {
      * finished the game. use checkWinning method of the player class to determine
      */
     public boolean didGameFinish() {
-        if ( players[currentPlayerIndex].checkWinning()) {
+        if ( players[currentPlayerIndex].checkWinning() == true) {
             return true;
         }
         else {
@@ -244,25 +246,27 @@ public class SimplifiedOkeyGame {
     public Player getCurrentPlayer() {
          return players[currentPlayerIndex];
     }
-    /*
-    * This method aims to sort the tile array in ascending order
-    *
-    *@param list the tile that will be sorted
-    */
-    public static void sortArray(int[] list){
+
+    /**
+     * This method aims to sort the tile array in ascending or 
+     * 
+     * @param list the tile that will be sorted
+     * @author Elif Su Temirel due to the errors in her gitKraken I uploaded this method
+     */
+    public static void sortArray(Tile[] list){
         boolean test;
         int temp;
         do{
             test = true;
             for(int n = 0; n < list.length - 1; n++){
-                if(list[n] > list[n+1]){
-                    temp = list[n];
+                if(list[n].value > list[n+1].value){
+                    temp = list[n].value;
                     list[n] = list[n + 1];
-                    list[n + 1] = temp;
+                    list[n + 1].value = temp;
                 }
             }
             for(int a = 0; a < list.length - 1; a++){
-                    if(list[a] > list[a+1]){
+                    if(list[a].value > list[a+1].value){
                         test = false;
                     }
             }
@@ -270,4 +274,6 @@ public class SimplifiedOkeyGame {
         while ( test == false);
     }
 }
-//test
+
+
+
