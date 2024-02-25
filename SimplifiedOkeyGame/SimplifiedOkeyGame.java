@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class SimplifiedOkeyGame {
 
@@ -36,23 +38,53 @@ public class SimplifiedOkeyGame {
     public void distributeTilesToPlayers() {
         int playerOkeyIndex = 0;
         int distrubutedCardIndex = 0;
-        while (playerOkeyIndex < 15) {
+        /* while (playerOkeyIndex < 15) {
             players[0].playerTiles[playerOkeyIndex] = tiles[distrubutedCardIndex];
             distrubutedCardIndex++;
             playerOkeyIndex++;
-
+            getAndRemoveTile(distrubutedCardIndex);
+        } */
+        /* for (int i = 0; i < 15; i++) {
+            players[0].playerTiles[i] = tiles[distrubutedCardIndex];
+            distrubutedCardIndex++;
+            getAndRemoveTile(distrubutedCardIndex);
         }
         for (int i = 1; i < players.length; i++){
             for (int k = 0; k < 14; k++) {
                 players[i].playerTiles[k] = tiles [distrubutedCardIndex];
                 distrubutedCardIndex++;
+                getAndRemoveTile(distrubutedCardIndex);
             }
         }
         for (Player player : players) {
             sortArray(player.getTiles());
+        } */
+
+        int distributedCardIndex = 0;
+
+        for (int i = 0; i < players[0].getTiles().length; i++) {
+            players[0].playerTiles[i] = new Tile(tiles[distributedCardIndex].getValue());
+            distributedCardIndex++;
         }
 
     }
+
+    public Tile getAndRemoveTile(int index) {
+        if (index >= 0)
+        {
+             Tile temp;
+             for (int i = index; i + 1 < tiles.length; i++) {
+                 temp = tiles[i];
+                 tiles[i] = tiles[index+1];
+                 tiles[i+1] = temp;
+             }
+             return tiles[index];
+        }
+        else {
+             System.out.println("error");
+        }
+        return null;
+     }
 
     /*
      * TODO: get the last discarded tile for the current player
@@ -75,24 +107,19 @@ public class SimplifiedOkeyGame {
         if (tileCount > 0) {
             //Find the top tile
             Tile currentTopTile = tiles[tileCount-1];
+            String tileName = currentTopTile.toString();
 
             //Update the tile count
             tileCount--;
+            
+            //Remove tile from array
+            currentTopTile = null;
 
-            //Creating a new array to store the tiles removing the top tile
-            Tile[] updatedTiles = new Tile[tileCount];
-            for (int i = 0; i < tileCount ; i ++) {
-                updatedTiles[i] = tiles[i];
-            }
-
-            //Update the tiles reference 
-            tiles = updatedTiles;
-
-            return  currentTopTile.toString();
+            return  tileName;
         } 
         //If there are no tiles left, return an error message saying so
         else {
-            String errorMessage = "No  more tiles left!";
+            String errorMessage = "No more tiles left!";
             return errorMessage;
         }
     }
@@ -103,15 +130,19 @@ public class SimplifiedOkeyGame {
     public void shuffleTiles() {
     /*  we  will shuffle and change the cards positions 52 times (104 / 2) 
      *  this amount is usually enough to a fair shuffle */
-        Random randomTile = new Random();
+/*         Random random = new Random();
+        Tile randomTile;
         int randomTileIndex;
         int temp; // this temp is for to change the cards position with each other
         for(int n = 0; n < 52; n++){
             temp = tiles[n].value;
-            randomTileIndex = randomTile.nextInt(104);
+            randomTileIndex = random.nextInt(104);
             tiles[n].value = tiles[randomTileIndex].value;
             tiles[randomTileIndex].value = temp;
-        }
+               
+        } */
+
+        Collections.shuffle(Arrays.asList(tiles));
     }
 
     /*
@@ -119,7 +150,7 @@ public class SimplifiedOkeyGame {
      * finished the game. use checkWinning method of the player class to determine
      */
     public boolean didGameFinish() {
-        if ( players[currentPlayerIndex].checkWinning() == true) {
+        if ( players[currentPlayerIndex].checkWinning() == true || tileCount == 0) {
             return true;
         }
         else {
@@ -133,16 +164,15 @@ public class SimplifiedOkeyGame {
     public Player[] getPlayerWithHighestLongestChain() {
         Player[] winners = new Player[players.length];
         int max = 0;
-        for (int i = 0; i <players.length; i++) {
+        for (int i = 0; i < players.length; i++) {
             if (players[i].findLongestChain() > max) {
                 max = players[i].findLongestChain();
             }
         }
-        int number = 0;
-        for (int i = 0; i <players.length; i++) {
-            if (players[i].findLongestChain()== max) {
-                winners[number] =winners[i];
-                number++;
+
+        for (int i = 0; i < players.length; i++) {
+            if (players[i].findLongestChain() == max) {
+                winners[i] = players[i];
             }
         }
         return winners;
@@ -229,7 +259,7 @@ public class SimplifiedOkeyGame {
         return currentPlayerIndex;
     }
 
-      public String getCurrentPlayerName() {
+    public String getCurrentPlayerName() {
         return getCurrentPlayer().getName();
     }
 
@@ -266,7 +296,6 @@ public class SimplifiedOkeyGame {
                     list[n + 1].value = temp;
                     }
                 }
-                
             }
             for(int a = 0; a < list.length - 1; a++){
                 if(list[a+1] != null){

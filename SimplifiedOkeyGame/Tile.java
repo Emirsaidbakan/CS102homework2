@@ -1,4 +1,4 @@
-public class Tile {
+public class Tile implements Comparable {
     
     int value;
 
@@ -23,11 +23,12 @@ public class Tile {
      * return 0 if they have the same value
      * return -1 if the given tile has higher value
      */
-    public int compareTo(Tile t) {
-       if (this.value  < t.value) {
+    public int compareTo(Object T) {
+        Tile tile = (Tile)T;
+       if (this.value  < tile.value) {
         return -1;
        }
-       else if ( this.value == t.value){
+       else if ( this.value == tile.value){
         return 0;
        }
        else { //this.value > t.value

@@ -7,6 +7,12 @@ public class Player {
     public Player(String name) {
         setName(name);
         playerTiles = new Tile[15]; // there are at most 15 tiles a player owns at any time
+        for (Tile tile : playerTiles) {
+            if(tile != null)
+            {
+                numberOfTiles++;
+            }
+        }
     }
 
     /*
@@ -17,10 +23,9 @@ public class Player {
      * check the assigment text for more details on winning condition
      */
     public boolean checkWinning() {
-
         int currentChainLength = 1;
         for (int i = 0; i < numberOfTiles- 1; i++) {
-            if ( playerTiles[i].getValue() + 1 == playerTiles[i+1].getValue()) {
+            if ( playerTiles[i].getValue() + 1 == playerTiles[i+1].getValue() || playerTiles[i].getValue() == playerTiles[i+1].getValue()) {
                 currentChainLength ++;
                 if (currentChainLength == 15) {
                     return true;
@@ -43,7 +48,7 @@ public class Player {
         int longestChain = 0;
         int similarTilesCounter = 0;        
         // This variable will be used for count the same serial tiles to detect the longest tile serie
-        for(int n = 0; n < numberOfTiles - 1; n++){
+        for(int n = 0; n < numberOfTiles; n++){
             if(playerTiles[n] == playerTiles[n + 1]){
                 similarTilesCounter++;
             }
@@ -63,10 +68,18 @@ public class Player {
     public Tile getAndRemoveTile(int index) {
        if (index >= 0)
         {
+            Tile temp = playerTiles[index];
+            int lastTileIndex = 0;
             for (int i = index; i + 1 < numberOfTiles; i++) {
-                playerTiles[i] = playerTiles[index+1];
+                if (playerTiles[i] != null){
+                    playerTiles[i] = playerTiles[i + 1];
+                } else {
+                    lastTileIndex = i;
+                }
             }
-            return playerTiles[index];
+            playerTiles[lastTileIndex] = null;
+
+            return temp;
         }
         else {
             System.out.println("error");
@@ -94,6 +107,7 @@ public class Player {
             playerTiles[i + 1] = playerTiles[i];
         }
         playerTiles[position] = t;
+        numberOfTiles++;
     }
 
     /*
@@ -114,8 +128,10 @@ public class Player {
      */
     public void displayTiles() {
         System.out.println(playerName + "'s Tiles:");
-        for (int i = 0; i <playerTiles.length; i++) {
-            System.out.print(playerTiles[i].toString() + " ");
+        for (int i = 0; i < playerTiles.length; i++) {
+            if (playerTiles[i] != null) {
+                System.out.print(playerTiles[i].toString() + " ");
+            }   
         }
         System.out.println();
     }
