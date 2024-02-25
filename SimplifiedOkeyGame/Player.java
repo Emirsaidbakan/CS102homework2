@@ -61,6 +61,19 @@ public class Player {
      */
     public void addTile(Tile t) {
 
+        for (int i = 0; i < playerTiles.length; i++) {
+            if (t.getValue() >= playerTiles[i].getValue() && t.getValue() <= playerTiles[i + 1].getValue()) {
+                insertTile(t, i + 1);
+                return;
+            }
+        }
+    }
+
+    private void insertTile(Tile t, int position){
+        for (int i = playerTiles.length - 1; i >= position; i--) {
+            playerTiles[i + 1] = playerTiles[i];
+        }
+        playerTiles[position] = t;
     }
 
     /*
