@@ -7,7 +7,6 @@ public class Player {
     public Player(String name) {
         setName(name);
         playerTiles = new Tile[15]; // there are at most 15 tiles a player owns at any time
-        numberOfTiles = 0; // currently this player owns 0 tiles, will pick tiles at the beggining of the game
     }
 
     /*
@@ -20,7 +19,7 @@ public class Player {
     public boolean checkWinning() {
 
         int currentChainLength = 1;
-        for (int i = 0; i < numberOfTiles - 1; i++) {
+        for (int i = 0; i < playerTiles.length- 1; i++) {
             if ( playerTiles[i].getValue() + 1 == playerTiles[i+1].getValue()) {
                 currentChainLength ++;
                 if (currentChainLength == 15) {
@@ -44,7 +43,7 @@ public class Player {
         int longestChain = 0;
         int similarTilesCounter = 0;        
         // This variable will be used for count the same serial tiles to detect the longest tile serie
-        for(int n = 0; n < playerTiles.length - 1; n++){
+        for(int n = 0; n <playerTiles.length - 1; n++){
             if(playerTiles[n] == playerTiles[n + 1]){
                 similarTilesCounter++;
             }
@@ -62,10 +61,17 @@ public class Player {
      * TODO: removes and returns the tile in given index position
      */
     public Tile getAndRemoveTile(int index) {
-        for (int i = index; i < playerTiles.length;i++) {
-            playerTiles[i] = playerTiles[index+1];
+       if (index >= 0)
+        {
+            for (int i = index; i + 1 < playerTiles.length; i++) {
+                playerTiles[i] = playerTiles[index+1];
+            }
+            return playerTiles[index];
         }
-        return playerTiles[index];
+        else {
+            System.out.println("error");
+        }
+        return null;
     }
 
     /*
@@ -75,7 +81,7 @@ public class Player {
      */
     public void addTile(Tile t) {
 
-        for (int i = 0; i < playerTiles.length; i++) {
+        for (int i = 0; i + 1 < playerTiles.length; i++) {
             if (t.getValue() >= playerTiles[i].getValue() && t.getValue() <= playerTiles[i + 1].getValue()) {
                 insertTile(t, i + 1);
                 return;
@@ -95,7 +101,7 @@ public class Player {
      */
     public int findPositionOfTile(Tile t) {
         int tilePosition = -1;
-        for (int i = 0; i < numberOfTiles; i++) {
+        for (int i = 0; i < playerTiles[i]; i++) {
             if(playerTiles[i].matchingTiles(t)) {
                 tilePosition = i;
             }
@@ -108,7 +114,11 @@ public class Player {
      */
     public void displayTiles() {
         System.out.println(playerName + "'s Tiles:");
+<<<<<<< HEAD
         for (int i = 0; i <playerTiles.length; i++) {
+=======
+        for (int i = 0; i < playerTiles.length; i++) {
+>>>>>>> a5a0a367ae2d5f6c83e88da1180f165d75c61b2f
             System.out.print(playerTiles[i].toString() + " ");
         }
         System.out.println();
