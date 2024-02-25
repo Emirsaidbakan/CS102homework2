@@ -236,7 +236,6 @@ public class SimplifiedOkeyGame {
     }
 
     public Player getCurrentPlayer() {
-        return getCurrentPlayer();
-    }
+         return players[currentPlayerIndex];
 
 }
