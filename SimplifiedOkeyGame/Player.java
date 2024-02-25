@@ -114,15 +114,8 @@ public class Player {
      */
     public void displayTiles() {
         System.out.println(playerName + "'s Tiles:");
-<<<<<<< HEAD
-<<<<<<< HEAD
         for (int i = 0; i <playerTiles.length; i++) {
-=======
-        for (int i = 0; i < playerTiles.length; i++) {
->>>>>>> a5a0a367ae2d5f6c83e88da1180f165d75c61b2f
-=======
-        for (int i = 0; i < numberOfTiles; i++) {
->>>>>>> 3c4620776655f063bdbf36adc3c4b885464e36a9
+
             System.out.print(playerTiles[i].toString() + " ");
         }
         System.out.println();

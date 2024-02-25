@@ -49,6 +49,7 @@ public class SimplifiedOkeyGame {
             }
             players[i].numberOfTiles = 14;
         }
+
     }
 
     /*
@@ -176,11 +177,13 @@ public class SimplifiedOkeyGame {
      */
     public void discardTileForComputer() {
         //Checks whether there are duplicate tiles, if there are then that tile is discarded and breaks
-        for (int i = 0; i < getCurrentPlayer().getTiles().length; i++) {
-            if (getCurrentPlayer().getTiles()[i].getValue() == getCurrentPlayer().getTiles()[i + 1].getValue()) {
-                discardTile(i);
-                return;
-            }
+        for (int i = 0; i < getCurrentPlayer().getTiles().length; i++) {            
+            if (getCurrentPlayer().getTiles()[i + 1] != null) {
+                if (getCurrentPlayer().getTiles()[i].getValue() == getCurrentPlayer().getTiles()[i + 1].getValue()) {
+                    discardTile(i);
+                    return;
+                }
+            }   
         }
 
         //If there are no duplicate tiles, looks for the shortest chain and discards the last tile on the chain
@@ -188,12 +191,14 @@ public class SimplifiedOkeyGame {
         int temp = 0;
         int index = 0;
         for (int i = 0; i < getCurrentPlayer().getTiles().length; i++) {
-            if(getCurrentPlayer().getTiles()[i + 1].getValue() - getCurrentPlayer().getTiles()[i].getValue() == 1) {
-                temp++;
-            }
-            if (temp < shortestChain) {
-                shortestChain = temp;
-                index = i;
+            if (getCurrentPlayer().getTiles()[i + 1] != null) {
+                if(getCurrentPlayer().getTiles()[i + 1].getValue() - getCurrentPlayer().getTiles()[i].getValue() == 1) {
+                    temp++;
+                }
+                if (temp < shortestChain) {
+                    shortestChain = temp;
+                    index = i;
+                }
             }
         }
         discardTile(index + shortestChain - 1);
@@ -238,6 +243,6 @@ public class SimplifiedOkeyGame {
 
     public Player getCurrentPlayer() {
          return players[currentPlayerIndex];
-    }
 
+}
 }
