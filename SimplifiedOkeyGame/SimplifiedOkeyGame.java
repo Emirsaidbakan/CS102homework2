@@ -49,7 +49,7 @@ public class SimplifiedOkeyGame {
             }
         }
         for (Player player : players) {
-            
+            sortArray(player.getTiles());
         }
 
     }
@@ -259,7 +259,7 @@ public class SimplifiedOkeyGame {
         do{
             test = true;
             for(int n = 0; n < list.length - 1; n++){
-                if(list[n] != null){
+                if(list[n+1] != null){
                   if(list[n].value > list[n+1].value){
                     temp = list[n].value;
                     list[n] = list[n + 1];
@@ -269,7 +269,7 @@ public class SimplifiedOkeyGame {
                 
             }
             for(int a = 0; a < list.length - 1; a++){
-                if(list[a] != null){
+                if(list[a+1] != null){
                         if(list[a].value > list[a+1].value){
                         test = false;
                         }
