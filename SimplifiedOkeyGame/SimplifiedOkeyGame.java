@@ -88,11 +88,9 @@ public class SimplifiedOkeyGame {
     }
 
     /*
-     * TODO: pick a tile for the current computer player using one of the following:
+     * pick a tile for the current computer player using one of the following:
      * - picking from the tiles array using getTopTile()
      * - picking from the lastDiscardedTile using getLastDiscardedTile()
-     * you should check if getting the discarded tile is useful for the computer
-     * by checking if it increases the longest chain length, if not get the top tile
      */
     public void pickTileForComputer() {
         
@@ -109,11 +107,31 @@ public class SimplifiedOkeyGame {
     }
 
     /*
-     * TODO: Current computer player will discard the least useful tile.
-     * you may choose based on how useful each tile is
+     * Current computer player will discard the least useful tile.
      */
     public void discardTileForComputer() {
+        //Checks whether there are duplicate tiles, if there are then that tile is discarded and breaks
+        for (int i = 0; i < getCurrentPlayer().playerTiles.length; i++) {
+            if (getCurrentPlayer().getTiles()[i].value == getCurrentPlayer().getTiles()[i + 1].value) {
+                lastDiscardedTile = getCurrentPlayer().getAndRemoveTile(i);
+                return;
+            }
+        }
 
+        //If there are no duplicate tiles, looks for the shortest chain and discards the last tile on the chain
+        int shortestChain = 100;
+        int temp = 0;
+        int index = 0;
+        for (int i = 0; i < getCurrentPlayer().playerTiles.length; i++) {
+            if(getCurrentPlayer().playerTiles[i + 1].getValue() - getCurrentPlayer().playerTiles[i].getValue() == 1) {
+                temp++;
+            }
+            if (temp < shortestChain) {
+                shortestChain = temp;
+                index = i;
+            }
+        }
+        lastDiscardedTile = getCurrentPlayer().getAndRemoveTile(index + shortestChain - 1);
     }
 
     /*
