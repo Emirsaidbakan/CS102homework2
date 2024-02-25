@@ -104,7 +104,7 @@ public class SimplifiedOkeyGame {
         int temp; // this temp is for to change the cards position with each other
         for(int n = 0; n < 52; n++){
             temp = tiles[n].value;
-            randomTileIndex = randomTile.nextInt(104) - 1;
+            randomTileIndex = randomTile.nextInt(104);
             tiles[n].value = tiles[randomTileIndex].value;
             tiles[randomTileIndex].value = temp;
         }
