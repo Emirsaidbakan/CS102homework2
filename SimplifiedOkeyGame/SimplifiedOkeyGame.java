@@ -113,7 +113,7 @@ public class SimplifiedOkeyGame {
         //Checks whether there are duplicate tiles, if there are then that tile is discarded and breaks
         for (int i = 0; i < getCurrentPlayer().playerTiles.length; i++) {
             if (getCurrentPlayer().getTiles()[i].value == getCurrentPlayer().getTiles()[i + 1].value) {
-                lastDiscardedTile = getCurrentPlayer().getAndRemoveTile(i);
+                discardTile(i);
                 return;
             }
         }
@@ -131,7 +131,7 @@ public class SimplifiedOkeyGame {
                 index = i;
             }
         }
-        lastDiscardedTile = getCurrentPlayer().getAndRemoveTile(index + shortestChain - 1);
+        discardTile(index + shortestChain - 1);
     }
 
     /*
@@ -140,10 +140,7 @@ public class SimplifiedOkeyGame {
      * that player's tiles
      */
     public void discardTile(int tileIndex) {
-
-        lastDiscardedTile = getCurrentPlayer().playerTiles[tileIndex];
-        getCurrentPlayer().playerTiles[tileIndex] = null;
-
+        lastDiscardedTile = getCurrentPlayer().getAndRemoveTile(tileIndex);
     }
 
     public void displayDiscardInformation() {
