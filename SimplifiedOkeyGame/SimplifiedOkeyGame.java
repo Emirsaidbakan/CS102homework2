@@ -1,14 +1,14 @@
-import java.util.Scanner;
+import java.util.Random;
 
 public class SimplifiedOkeyGame {
 
-    private Player[] players;
-    private Tile[] tiles;
-    private int tileCount;
+    Player[] players;
+    Tile[] tiles;
+    int tileCount;
 
-    private Tile lastDiscardedTile;
+    Tile lastDiscardedTile;
 
-    private int currentPlayerIndex = 0;
+    int currentPlayerIndex = 0;
 
     public SimplifiedOkeyGame() {
         players = new Player[4];
